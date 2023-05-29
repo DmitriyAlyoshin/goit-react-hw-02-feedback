@@ -1,34 +1,33 @@
 import PropTypes from 'prop-types'; 
-import css from './Statistics.module.css'; 
+import { StatisticList, StatisticItem, StatisticText, } from './Statistics.styled';
 
-export const Statistics = ({
-  options, 
-  statistic,
-  total, 
-  positivePercentage, 
-}) => {
+export function Statistics({ good, neutral, bad, total, positivePercentage }) {
   return (
-    <>
-      
-      {options.map((name, i) => {
-        return (
-          
-          <p key={i} className={css[name]}>
-            {name}:{}
-            <span className={css.numbers}>{statistic[name]}</span>
-          </p>
-        );
-      })}
-      <p>
-        Total: <span className={css.numbers}>{total}</span>
-      </p>
-      <p className={css.good}>
-        Positive feedback:{' '}
-        <span className={css.numbers}>{positivePercentage()}</span>%
-      </p>
-    </>
+    <StatisticList>
+      <StatisticItem>
+        <StatisticText>Good - </StatisticText>
+        <span>{good}</span>
+      </StatisticItem>
+      <StatisticItem>
+        <StatisticText>Neutral - </StatisticText>
+        <span>{neutral}</span>
+      </StatisticItem>
+      <StatisticItem>
+        <StatisticText>Bad - </StatisticText>
+        <span>{bad}</span>
+      </StatisticItem>
+      <StatisticItem>
+        <StatisticText>Total - </StatisticText>
+        <span>{total}</span>
+      </StatisticItem>
+      <StatisticItem>
+        <StatisticText>Positive feedbacks - </StatisticText>
+        <span>{positivePercentage}%</span>
+      </StatisticItem>
+    </StatisticList>
   );
-};
+}
+
 
 Statistics.propTypes = {
   options: PropTypes.arrayOf(PropTypes.oneOf(['good', 'neutral', 'bad'])) 
